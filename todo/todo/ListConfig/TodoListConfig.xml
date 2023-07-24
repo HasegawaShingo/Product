@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfListViewDisplayConfigEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <ListViewDisplayConfigEntity>
+    <Name>ID</Name>
+    <DisplayName>ID</DisplayName>
+    <Visible>0</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>ProjectName</Name>
+    <DisplayName>プロジェクト名</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>SubSystemName</Name>
+    <DisplayName>システム名</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>ProcessName</Name>
+    <DisplayName>工程</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>ParentTaskName</Name>
+    <DisplayName>作業内容</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>TaskName</Name>
+    <DisplayName>タスク</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>EstimatedTime</Name>
+    <DisplayName>予定工数</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>ActualTime</Name>
+    <DisplayName>実績工数</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>Status</Name>
+    <DisplayName>状態</DisplayName>
+    <Visible>1</Visible>
+    <Type>StatusCombobox</Type>
+  </ListViewDisplayConfigEntity>
+
+  <ListViewDisplayConfigEntity>
+    <Name>Note</Name>
+    <DisplayName>備考</DisplayName>
+    <Visible>1</Visible>
+    <Type>Text</Type>
+  </ListViewDisplayConfigEntity>
+
+</ArrayOfListViewDisplayConfigEntity>

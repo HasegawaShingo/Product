@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTodoItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TodoItem>
+    <ID></ID>
+    <ProjectName></ProjectName>
+    <SubSystemName></SubSystemName>
+    <ProcessName></ProcessName>
+    <ParentTaskName></ParentTaskName>
+    <TaskName></TaskName>
+    <EstimatedTime></EstimatedTime>
+    <ActualTime></ActualTime>
+    <Status></Status>
+    <Note></Note>
+  </TodoItem>
+</ArrayOfTodoItem>
