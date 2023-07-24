@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+
+  <ImplementLibraries>
+    <!-- name : assembly name, path : assembly full path -->
+    <ImplementLibrary Name="TestLibA" Path="C:\Users\hasep\source\repos\CheapInjector\TestLibrary\TestLibA\bin\Debug\net6.0\TestLibA.dll" />
+    <ImplementLibrary Name="TestLibB" Path="C:\Users\hasep\source\repos\CheapInjector\TestLibrary\TestLibB\bin\Debug\net6.0\TestLibB.dll" />
+  </ImplementLibraries>
+
+  <Definitions>
+    <!-- alias : definition name, interfacename : use interface fullname, libraryname : assembly name(related implementlibraries), fullname : namespace.classname -->
+    <Definition Alias="A classA" InterfaceName="TestInterfaceA.IClassA" LibraryName="TestLibA" FullName="TestLibA.ClassA" />
+    <Definition Alias="B classB" InterfaceName="TestInterfaceB.IClassB" LibraryName="TestLibB" FullName="TestLibB.Class1" />
+    <Definition Alias="B classA" InterfaceName="TestInterfaceA.IClassA" LibraryName="TestLibB" FullName="TestLibB.ClassA" />
+  </Definitions>
+  
+</root>
