@@ -3,8 +3,8 @@
 
   <ImplementLibraries>
     <!-- name : assembly name, path : assembly full path -->
-    <ImplementLibrary Name="TestLibA" Path="C:\Users\hasep\source\repos\CheapInjector\TestLibrary\TestLibA\bin\Debug\net6.0\TestLibA.dll" />
-    <ImplementLibrary Name="TestLibB" Path="C:\Users\hasep\source\repos\CheapInjector\TestLibrary\TestLibB\bin\Debug\net6.0\TestLibB.dll" />
+    <ImplementLibrary Name="TestLibA" Path="" />
+    <ImplementLibrary Name="TestLibB" Path="" />
   </ImplementLibraries>
 
   <Definitions>
