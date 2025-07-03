@@ -80,7 +80,7 @@ namespace CheapInjectorTests
             var instanceA = Container.CreateInstance<IClassA>();
             var actual = Implement.HasDispose(instanceA);
 
-            Assert.IsFalse(actual);
+            Assert.That(!actual);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace CheapInjectorTests
             var instanceB = Container.CreateInstance<IClassB>();
             var actual = Implement.HasDispose(instanceB);
 
-            Assert.IsTrue(actual);
+            Assert.That(actual);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace CheapInjectorTests
             var instanceB = Container.CreateInstance<IClassB>();
             var actual = Implement.DisposeInstance(instanceB);
 
-            Assert.IsTrue(actual);
+            Assert.That(actual);
         }
 
         [Test]

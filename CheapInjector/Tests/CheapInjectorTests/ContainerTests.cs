@@ -7,7 +7,7 @@ namespace CheapInjectorTests
 {
     internal class ContainerTests
     {
-        private string XmlFilePath = @"";
+        private string XmlFilePath = @"C:\Users\user\Documents\repos\Product\CheapInjector\Tests\CheapInjectorTests\bin\Debug\net9.0\DefinitionFiles\InjectionSettings.xml";
 
         [OneTimeSetUp]
         public void Setup()
@@ -22,7 +22,7 @@ namespace CheapInjectorTests
             var actual = target.GetString();
             var expected = "引数なしのコンストラクタでインスタンスを作成しました。";
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace CheapInjectorTests
             var actual = target.GetString();
             var expected = "引数を設定しました。";
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace CheapInjectorTests
             var actual = target.GetString();
             var expected = "TestLibBのClassAです。";
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace CheapInjectorTests
             var actual = target.GetString();
             var expected = "エイリアスと引数の確認。";
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace CheapInjectorTests
             var actual = retarget.GetString();
             var expected = "シングルトンでインスタンス作成。";
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

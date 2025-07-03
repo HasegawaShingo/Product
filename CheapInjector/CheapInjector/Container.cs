@@ -335,9 +335,9 @@ namespace CheapInjector
         {
             var definitions = GetDefinisionsEntities<T>(alias);
 
-            if (Implement.HasDispose(definitions[0]))
+                        if (definitions[0].Instance != null && Implement.HasDispose(definitions[0].Instance))
             {
-                if (!Implement.DisposeInstance(definitions[0]))
+                if (!Implement.DisposeInstance(definitions[0].Instance))
                 {
                     return false;
                 }

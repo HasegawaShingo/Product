@@ -1,109 +1,91 @@
-ï»¿using System.Xml.Linq;
+using System.Xml.Linq;
 using System.Xml.XPath;
 using CheapInjector.Entity;
 
 namespace CheapInjector
 {
     /// <summary>
-    /// DIè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚¯ãƒ©ã‚¹
+    /// DIİ’èƒtƒ@ƒCƒ‹“Ç‚İ‚İƒNƒ‰ƒX
     /// </summary>
     internal static class Configuration
     {
         /// <summary>
-        /// DIè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã€èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæƒ…å ±æ ¼ç´ã‚¯ãƒ©ã‚¹ã€DIå®šç¾©æ ¼ç´ã‚¯ãƒ©ã‚¹ã®ãƒªã‚¹ãƒˆã‚’ä½œæˆã—ã¾ã™ã€‚
+        /// DIİ’èƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İA“Ç‚İ‚İ‘ÎÛƒ‰ƒCƒuƒ‰ƒŠî•ñŠi”[ƒNƒ‰ƒXADI’è‹`Ši”[ƒNƒ‰ƒX‚ÌƒŠƒXƒg‚ğì¬‚µ‚Ü‚·B
         /// </summary>
-        /// <param name="configurationFilePath">èª­ã¿è¾¼ã¿å¯¾è±¡ã®DIè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚</param>
-        /// <returns>èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæƒ…å ±æ ¼ç´ã‚¯ãƒ©ã‚¹ãƒªã‚¹ãƒˆã€DIå®šç¾©æ ¼ç´ã‚¯ãƒ©ã‚¹ãƒªã‚¹ãƒˆã‚’è¿”ã—ã¾ã™ã€‚</returns>
+        /// <param name="configurationFilePath">“Ç‚İ‚İ‘ÎÛ‚ÌDIİ’èƒtƒ@ƒCƒ‹ƒpƒX‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B</param>
+        /// <returns>“Ç‚İ‚İ‘ÎÛƒ‰ƒCƒuƒ‰ƒŠî•ñŠi”[ƒNƒ‰ƒXƒŠƒXƒgADI’è‹`Ši”[ƒNƒ‰ƒXƒŠƒXƒg‚ğ•Ô‚µ‚Ü‚·B</returns>
         internal static (List<ImplementLibraryEntity> ImplementLibraries, List<DefinitionsEntity> DefinitionsEntities) GetConfiguration(string configurationFilePath)
         {
             var sourceXml = XDocument.Load(configurationFilePath);
-
             var implementLibraryElements = sourceXml.XPathSelectElements("root/ImplementLibraries/ImplementLibrary");
             var implementLibraries = GetImplementLibraries(implementLibraryElements);
-
             var definitionsElements = sourceXml.XPathSelectElements("root/Definitions/Definition");
             var definitionsEntities = GetDefinitions(definitionsElements);
-
             return (implementLibraries, definitionsEntities);
         }
 
         /// <summary>
-        /// DIè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæƒ…å ±ã‚’èª­ã¿è¾¼ã¿ã¾ã™ã€‚
+        /// DIİ’èƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ‘ÎÛƒ‰ƒCƒuƒ‰ƒŠî•ñ‚ğ“Ç‚İ‚İ‚Ü‚·B
         /// </summary>
-        /// <param name="elements">èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæƒ…å ±ã®ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚</param>
-        /// <returns>èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæƒ…å ±æ ¼ç´ã‚¯ãƒ©ã‚¹ãƒªã‚¹ãƒˆã‚’è¿”ã—ã¾ã™ã€‚</returns>
+        /// <param name="elements">“Ç‚İ‚İ‘ÎÛƒ‰ƒCƒuƒ‰ƒŠî•ñ‚ÌƒGƒŒƒƒ“ƒg‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B</param>
+        /// <returns>“Ç‚İ‚İ‘ÎÛƒ‰ƒCƒuƒ‰ƒŠî•ñŠi”[ƒNƒ‰ƒXƒŠƒXƒg‚ğ•Ô‚µ‚Ü‚·B</returns>
         private static List<ImplementLibraryEntity> GetImplementLibraries(IEnumerable<XElement> elements)
         {
             var result = new List<ImplementLibraryEntity>();
-
-            if (elements == null || !elements.Any())
-                return result;
+            if (elements == null || !elements.Any()) return result;
 
             foreach (var element in elements)
             {
-                var attributes = element.Attributes();
-                var nameAttribute = attributes.Where(e => e.Name.ToString().ToLower() == "name").FirstOrDefault();
-                var pathAttribute = attributes.Where(e => e.Name.ToString().ToLower() == "path").FirstOrDefault();
+                var nameAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("name", StringComparison.OrdinalIgnoreCase));
+                var pathAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("path", StringComparison.OrdinalIgnoreCase));
 
-                if (nameAttribute == null || pathAttribute == null)
-                    continue;
-
-                if (string.IsNullOrWhiteSpace(nameAttribute.Value) || string.IsNullOrWhiteSpace(pathAttribute.Value))
+                if (nameAttribute == null || pathAttribute == null || string.IsNullOrWhiteSpace(nameAttribute.Value) || string.IsNullOrWhiteSpace(pathAttribute.Value))
                     continue;
 
                 var entity = new ImplementLibraryEntity { Name = nameAttribute.Value, LibraryPath = pathAttribute.Value, IsLoading = false };
                 result.Add(entity);
             }
-
             return result;
         }
 
         /// <summary>
-        /// DIè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰DIå®šç¾©æƒ…å ±ã‚’èª­ã¿è¾¼ã¿ã¾ã™ã€‚
+        /// DIİ’èƒtƒ@ƒCƒ‹‚©‚çDI’è‹`î•ñ‚ğ“Ç‚İ‚İ‚Ü‚·B
         /// </summary>
-        /// <param name="elements">DIå®šç¾©æƒ…å ±ã®ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚</param>
-        /// <returns>DIå®šç¾©æ ¼ç´ã‚¯ãƒ©ã‚¹ãƒªã‚¹ãƒˆã‚’è¿”ã—ã¾ã™ã€‚</returns>
-        /// <exception cref="ArgumentException">DIå®šç¾©æƒ…å ±ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹ãŒé‡è¤‡ã—ã¦ã„ã‚‹å ´åˆã«ã‚¹ãƒ­ãƒ¼ã—ã¾ã™ã€‚</exception>
+        /// <param name="elements">DI’è‹`î•ñ‚ÌƒGƒŒƒƒ“ƒg‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B</param>
+        /// <returns>DI’è‹`Ši”[ƒNƒ‰ƒXƒŠƒXƒg‚ğ•Ô‚µ‚Ü‚·B</returns>
+        /// <exception cref="ArgumentException">DI’è‹`î•ñ‚ÌƒGƒCƒŠƒAƒX‚ªd•¡‚µ‚Ä‚¢‚éê‡‚ÉƒXƒ[‚µ‚Ü‚·B</exception>
         private static List<DefinitionsEntity> GetDefinitions(IEnumerable<XElement> elements)
         {
             var result = new List<DefinitionsEntity>();
-
-            if (elements == null || !elements.Any())
-                return result;
-
-            var aliases = elements.Attributes().Where(e => e.Name.ToString().ToLower() == "alias").Select(e => e.Value);
-            var aliasCount = aliases.Count();
-            var distinctedAliasCount = aliases.Distinct().Count();
-            if (aliasCount != distinctedAliasCount)
-                throw new ArgumentException("Alias was duplicated.");
+            if (elements == null || !elements.Any()) return result;
 
             foreach (var element in elements)
             {
-                var attributes = element.Attributes();
-                var aliasAttribute = attributes.Where(e => e.Name.ToString().ToLower() == "alias").FirstOrDefault();
-                var interfaceNameAttribute = attributes.Where(e => e.Name.ToString().ToLower() == "interfacename").FirstOrDefault();
-                var libraryNameAttribute = attributes.Where(e => e.Name.ToString().ToLower() == "libraryname").FirstOrDefault();
-                var fullNameAttrinute = attributes.Where(e => e.Name.ToString().ToLower() == "fullname").FirstOrDefault();
+                var aliasAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("alias", StringComparison.OrdinalIgnoreCase));
+                var interfaceNameAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("interfacename", StringComparison.OrdinalIgnoreCase));
+                var libraryNameAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("libraryname", StringComparison.OrdinalIgnoreCase));
+                var fullNameAttribute = element.Attributes().FirstOrDefault(a => a.Name.LocalName.Equals("fullname", StringComparison.OrdinalIgnoreCase));
 
-                if (aliasAttribute == null || interfaceNameAttribute == null || libraryNameAttribute == null || fullNameAttrinute == null)
-                    continue;
-
-                if (string.IsNullOrWhiteSpace(aliasAttribute.Value) || string.IsNullOrWhiteSpace(interfaceNameAttribute.Value) || string.IsNullOrWhiteSpace(libraryNameAttribute.Value) || string.IsNullOrWhiteSpace(fullNameAttrinute.Value))
+                if (interfaceNameAttribute == null || libraryNameAttribute == null || fullNameAttribute == null ||
+                    string.IsNullOrWhiteSpace(interfaceNameAttribute.Value) || string.IsNullOrWhiteSpace(libraryNameAttribute.Value) || string.IsNullOrWhiteSpace(fullNameAttribute.Value))
                     continue;
 
                 var entity = new DefinitionsEntity
                 {
-                    Alias = aliasAttribute.Value,
+                    Alias = aliasAttribute?.Value ?? string.Empty,
                     InterfaceName = interfaceNameAttribute.Value,
                     LibararyName = libraryNameAttribute.Value,
-                    FullName = fullNameAttrinute.Value,
+                    FullName = fullNameAttribute.Value,
                     Instance = null
                 };
                 result.Add(entity);
             }
 
+            var aliasesWithValues = result.Where(e => !string.IsNullOrWhiteSpace(e.Alias)).Select(e => e.Alias);
+            if (aliasesWithValues.Count() != aliasesWithValues.Distinct().Count())
+                throw new ArgumentException("Alias was duplicated.");
+
             return result;
         }
-
     }
 }
