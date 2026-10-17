@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BloodPressureTracker.ViewModels"
+             xmlns:models="clr-namespace:BloodPressureTracker.Models"
+             x:Class="BloodPressureTracker.Views.ListPage"
+             x:Name="RootPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:ListViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="追加" Command="{Binding AddRecordCommand}" Order="Primary" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadRecordsCommand}" RefreshColor="{StaticResource PrimaryColor}">
+            <CollectionView ItemsSource="{Binding Records}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DailyRecordSummary">
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="削除"
+                                               BackgroundColor="Red"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ListViewModel}}, Path=DeleteRecordCommand}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="削除"
+                                               BackgroundColor="Red"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ListViewModel}}, Path=DeleteRecordCommand}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame Style="{StaticResource CardFrameStyle}" Margin="12,6" Padding="12">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnCardTapped" CommandParameter="{Binding .}" NumberOfTapsRequired="1" />
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout Spacing="8">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                            <Label Text="{Binding RecordDate, StringFormat='{0:M/d (ddd)}'}" FontAttributes="Bold" FontSize="16" VerticalOptions="Center" />
+                                            <Label Grid.Column="1" Text="" />
+                                            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="16" HorizontalOptions="End" VerticalOptions="Center">
+                                                <Label Text="{Binding DayAverageReading, StringFormat='日平均 {0}'}" FontSize="14" TextColor="Gray" VerticalOptions="Center" />
+                                                <Label Text="{Binding DayAvgPulseDisplay}" FontSize="14" TextColor="Gray" VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                            <Label Text="朝平均" FontSize="11" TextColor="Gray" VerticalOptions="Center" />
+                                            <Label Grid.Column="1" Text="{Binding MorningReading}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
+                                            <Label Grid.Column="2" Text="{Binding MorningPulseDisplay}" FontSize="12" TextColor="Gray" VerticalOptions="Center" />
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                            <Label Text="夜平均" FontSize="11" TextColor="Gray" VerticalOptions="Center" />
+                                            <Label Grid.Column="1" Text="{Binding EveningReading}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
+                                            <Label Grid.Column="2" Text="{Binding EveningPulseDisplay}" FontSize="12" TextColor="Gray" VerticalOptions="Center" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <Label Text="{Binding Notes}" FontSize="12" TextColor="Gray" 
+                                           IsVisible="{Binding Notes, Converter={StaticResource StringToBoolConverter}}" 
+                                           MaxLines="2" LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Spacing="12" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label Text="📝" FontSize="48" />
+                        <Label Text="記録がありません" FontSize="18" TextColor="Gray" />
+                        <Label Text="右上の「追加」から測定結果を登録してください" FontSize="14" TextColor="Gray" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Loading overlay for navigation (not pull-to-refresh) -->
+        <Grid x:Name="LoadingOverlay" 
+              IsVisible="{Binding IsBusy}" 
+              BackgroundColor="#80000000" 
+              VerticalOptions="Fill" HorizontalOptions="Fill"
+              Opacity="1">
+            <ActivityIndicator IsRunning="True"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               Color="{StaticResource PrimaryColor}"
+                               WidthRequest="56" HeightRequest="56" />
+        </Grid>
+    </Grid>
+</ContentPage>

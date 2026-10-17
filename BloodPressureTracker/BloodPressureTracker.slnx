@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../BloodPressureTracker.Tests/BloodPressureTracker.Tests.csproj" />
+  <Project Path="BloodPressureTracker.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>

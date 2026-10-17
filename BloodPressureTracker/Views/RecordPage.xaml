@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BloodPressureTracker.ViewModels"
+             x:Class="BloodPressureTracker.Views.RecordPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:RecordViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="保存" Command="{Binding SaveCommand}" Priority="0" Order="Primary" IsEnabled="{Binding IsNotBusy}" />
+        <ToolbarItem Text="キャンセル" Command="{Binding CancelCommand}" Priority="1" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ScrollView>
+        <VerticalStackLayout Spacing="18" Padding="16">
+            <Frame Style="{StaticResource CardFrameStyle}">
+                <VerticalStackLayout Spacing="14" Padding="16">
+                    <Label Text="日付" Style="{StaticResource SectionHeaderStyle}" />
+                    <DatePicker Date="{Binding RecordDate}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Morning block -->
+            <Frame Style="{StaticResource CardFrameStyle}">
+                <VerticalStackLayout Spacing="10" Padding="12">
+                    <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="28">
+                        <Label Text="朝" FontAttributes="Bold" VerticalOptions="Center" Margin="0,0,12,0" />
+                        <TimePicker Grid.Column="1" Time="{Binding MorningTime}" HorizontalOptions="End" Margin="0,0,4,0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="8">
+                        <!-- row labels -->
+                        <Label Grid.Row="1" Grid.Column="0" Text="1回目" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Label Grid.Row="2" Grid.Column="0" Text="2回目" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Label Grid.Row="3" Grid.Column="0" Text="平均" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                        <!-- headers -->
+                        <Label Grid.Row="0" Grid.Column="1" Text="収縮期" FontSize="12" HorizontalOptions="Center" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="拡張期" FontSize="12" HorizontalOptions="Center" />
+                        <Label Grid.Row="0" Grid.Column="3" Text="脈拍" FontSize="12" HorizontalOptions="Center" />
+
+                        <!-- first measurements -->
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding MorningSystolic1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 120" Margin="0,6" />
+                        <Entry Grid.Row="1" Grid.Column="2" Text="{Binding MorningDiastolic1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 80" Margin="0,6" />
+                        <Entry Grid.Row="1" Grid.Column="3" Text="{Binding MorningPulse1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 70" Margin="0,6" />
+
+                        <!-- second measurements -->
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MorningSystolic2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 118" Margin="0,6" />
+                        <Entry Grid.Row="2" Grid.Column="2" Text="{Binding MorningDiastolic2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 78" Margin="0,6" />
+                        <Entry Grid.Row="2" Grid.Column="3" Text="{Binding MorningPulse2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 68" Margin="0,6" />
+
+                        <!-- averages -->
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding MorningAvgSystolic, StringFormat='{0} mmHg'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="3" Grid.Column="2" Text="{Binding MorningAvgDiastolic, StringFormat='{0} mmHg'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="3" Grid.Column="3" Text="{Binding MorningAvgPulse, StringFormat='{0} bpm'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Evening block -->
+            <Frame Style="{StaticResource CardFrameStyle}">
+                <VerticalStackLayout Spacing="10" Padding="12">
+                    <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="28">
+                        <Label Text="夜" FontAttributes="Bold" VerticalOptions="Center" Margin="0,0,12,0" />
+                        <TimePicker Grid.Column="1" Time="{Binding EveningTime}" HorizontalOptions="End" Margin="0,0,4,0" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="8">
+                        <!-- row labels -->
+                        <Label Grid.Row="1" Grid.Column="0" Text="1回目" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Label Grid.Row="2" Grid.Column="0" Text="2回目" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Label Grid.Row="3" Grid.Column="0" Text="平均" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                        <!-- headers -->
+                        <Label Grid.Row="0" Grid.Column="1" Text="収縮期" FontSize="12" HorizontalOptions="Center" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="拡張期" FontSize="12" HorizontalOptions="Center" />
+                        <Label Grid.Row="0" Grid.Column="3" Text="脈拍" FontSize="12" HorizontalOptions="Center" />
+
+                        <!-- first measurements -->
+                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding EveningSystolic1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 125" Margin="0,6" />
+                        <Entry Grid.Row="1" Grid.Column="2" Text="{Binding EveningDiastolic1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 82" Margin="0,6" />
+                        <Entry Grid.Row="1" Grid.Column="3" Text="{Binding EveningPulse1, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 72" Margin="0,6" />
+
+                        <!-- second measurements -->
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding EveningSystolic2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 124" Margin="0,6" />
+                        <Entry Grid.Row="2" Grid.Column="2" Text="{Binding EveningDiastolic2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 81" Margin="0,6" />
+                        <Entry Grid.Row="2" Grid.Column="3" Text="{Binding EveningPulse2, StringFormat='{0}'}" Keyboard="Numeric" Placeholder="例: 71" Margin="0,6" />
+
+                        <!-- averages -->
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding EveningAvgSystolic, StringFormat='{0} mmHg'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="3" Grid.Column="2" Text="{Binding EveningAvgDiastolic, StringFormat='{0} mmHg'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="3" Grid.Column="3" Text="{Binding EveningAvgPulse, StringFormat='{0} bpm'}" FontSize="14" HorizontalOptions="Center" LineBreakMode="NoWrap" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Day average and notes -->
+            <Frame Style="{StaticResource CardFrameStyle}" BackgroundColor="{StaticResource SecondaryColor}">
+                <VerticalStackLayout Spacing="10" Padding="16">
+                    <Label Text="1日の平均" Style="{StaticResource SectionHeaderStyle}" TextColor="{StaticResource Black}" />
+                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="18" RowSpacing="12">
+                        <!-- headers (align to bottom to separate from values) -->
+                        <Label Grid.Row="0" Grid.Column="0" Text="収縮期" FontSize="12" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="End" Opacity="0.9" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="拡張期" FontSize="12" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="End" Opacity="0.9" />
+                        <Label Grid.Row="0" Grid.Column="2" Text="脈拍" FontSize="12" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="End" Opacity="0.9" />
+
+                        <!-- values (align to top, add extra top margin) -->
+                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding DayAvgSystolic, StringFormat='{0} mmHg'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,14,0,0" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding DayAvgDiastolic, StringFormat='{0} mmHg'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,14,0,0" LineBreakMode="NoWrap" />
+                        <Label Grid.Row="1" Grid.Column="2" Text="{Binding DayAvgPulse, StringFormat='{0} bpm'}" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Black}" HorizontalOptions="Center" VerticalOptions="Start" Margin="0,14,0,0" LineBreakMode="NoWrap" />
+                    </Grid>
+                    <Label Text="メモ" FontSize="12" TextColor="{StaticResource Black}" Opacity="0.9" />
+                    <Editor Text="{Binding Notes}" Placeholder="体調、飲酒量など" HeightRequest="100" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+        <!-- Loading overlay for data loading -->
+        <Grid IsVisible="{Binding IsBusy}" 
+              BackgroundColor="#80000000" 
+              VerticalOptions="Fill" HorizontalOptions="Fill"
+              Opacity="1">
+            <ActivityIndicator IsRunning="True"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               Color="{StaticResource PrimaryColor}"
+                               WidthRequest="56" HeightRequest="56" />
+        </Grid>
+    </Grid>
+</ContentPage>

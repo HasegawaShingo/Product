@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BloodPressureTracker.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             x:Class="BloodPressureTracker.Views.StatisticsPage"
+             Title="{Binding Title}"
+             x:DataType="viewModels:StatisticsViewModel"
+             BackgroundColor="#1a1a2e">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            <Frame Style="{StaticResource CardFrameStyle}" BackgroundColor="#16213e">
+                <VerticalStackLayout Spacing="12" Padding="16">
+                    <Label Text="週平均" Style="{StaticResource SectionHeaderStyle}" TextColor="White" />
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" VerticalOptions="Center">
+                        <Button Text="◀ 前週" Command="{Binding PreviousWeekCommand}" WidthRequest="80" BackgroundColor="#0f3460" TextColor="White" />
+                        <Label Grid.Column="1" 
+                               Text="{Binding WeeklyDateRange}"
+                               FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                        <Button Grid.Column="2" Text="次週 ▶" Command="{Binding NextWeekCommand}" WidthRequest="80" BackgroundColor="#0f3460" TextColor="White" />
+                    </Grid>
+
+                    <!-- Weekly Chart - SKCanvasView -->
+                    <skia:SKCanvasView x:Name="WeeklyCanvasView" HeightRequest="280" PaintSurface="OnWeeklyPaintSurface" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource CardFrameStyle}" BackgroundColor="#16213e">
+                <VerticalStackLayout Spacing="12" Padding="16">
+                    <Label Text="月平均" Style="{StaticResource SectionHeaderStyle}" TextColor="White" />
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" VerticalOptions="Center">
+                        <Button Text="◀ 前月" Command="{Binding PreviousMonthCommand}" WidthRequest="80" BackgroundColor="#0f3460" TextColor="White" />
+                        <Label Grid.Column="1" 
+                               Text="{Binding MonthlyDateRange}"
+                               FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                        <Button Grid.Column="2" Text="次月 ▶" Command="{Binding NextMonthCommand}" WidthRequest="80" BackgroundColor="#0f3460" TextColor="White" />
+                    </Grid>
+
+                    <!-- Monthly Chart - SKCanvasView -->
+                    <skia:SKCanvasView x:Name="MonthlyCanvasView" HeightRequest="280" PaintSurface="OnMonthlyPaintSurface" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
